@@ -2,7 +2,12 @@ import React from 'react';
 
 class Header extends React.Component {
 	render() {
-		return <h1> bucket list!! </h1>;
+		return (
+			<div>
+				<h1> bucket lst </h1>
+				<p className="lead">Log and catalog all the stuff you want to accomplish!</p>
+			</div>
+		);
 	}
 }
 

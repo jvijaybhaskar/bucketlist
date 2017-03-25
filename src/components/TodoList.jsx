@@ -1,9 +1,12 @@
 import React from 'react';
+import { ListGroup } from 'react-bootstrap';
+
 
 
 import TodoItem from './TodoItem';
 import TodoInput from './TodoInput';
 import TodoStatus from './TodoStatus';
+
 
 
 class TodoList extends React.Component {
@@ -20,7 +23,7 @@ class TodoList extends React.Component {
 		console.log("TodoList handleAddItem", name);
 		if(name != ""){
 			const newItems = this.state.items.concat({name:name, done:false});
-			this.setState({items: newItems , currentStatus: "New state added" });
+			this.setState({items: newItems , currentStatus: "New wish added to list" });
 
 		} else {
 			this.state.currentStatus = "";	
@@ -64,36 +67,16 @@ class TodoList extends React.Component {
 		return ( 
 			<div>
 
-				<TodoInput onAddItem={this.handleAddItem.bind(this)} />				
-				<ul> 
+				<TodoInput onAddItem={this.handleAddItem.bind(this)} />		
+				<hr className="my-4"/>		
+				<ListGroup> 
 					{ this.state.items.map(item => <TodoItem name={item.name} done={item.done} onItemDelete={this.handleItemDelete.bind(this, item)} onToggleDone = {this.handleToggleDone.bind(this, item)}/>)}
-				</ul>
+				</ListGroup>
 
 
 				<TodoStatus status={this.state.currentStatus} onStatusClear={this.handleStatusClear.bind(this)}/>
 
 				{/*<span > {this.state.currentStatus} </span>*/}
-
-				
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<hr/>
-				<span> Pending Feature list</span>
- 				<ul>
- 					<li> Done:Delete list item </li>
- 					<li> Done:Update status based on action </li>
- 					<li> Edit bucket list </li>
-					<li> Auto hide status</li>
-					<li> Persist/Update list in backend</li>
-					<li> Improve look and feel</li>
-					<li> </li>
-				</ul>
-
-
 			</div>
 		);
 	}
