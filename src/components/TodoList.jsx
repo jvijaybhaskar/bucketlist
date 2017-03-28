@@ -15,18 +15,21 @@ class TodoList extends React.Component {
 		super();
 		this.state = {
 			items:[],
-			currentStatus:""
+			currentStatus:"",
+			maxListSize: 4
 		};
 	}
 
 	handleAddItem(name) {
 		console.log("TodoList handleAddItem", name);
-		if(name != ""){
+		if(name != "" && this.state.items.length < this.state.maxListSize){
 			const newItems = this.state.items.concat({name:name, done:false});
 			this.setState({items: newItems , currentStatus: "New wish added to list" });
 
 		} else {
-			this.state.currentStatus = "";	
+			
+			this.setState({currentStatus: (this.state.items.length >= this.state.maxListSize) ? "Limit Reached" : "" });
+				
 		}
 		console.log(this.state.currentStatus)
 	}
