@@ -1,5 +1,5 @@
 # bucketlist
-A simple project based on React to manage bucket list.  
+A sandbox project based on React to manage bucket/todo list.  
 This is a sandbox to try and learn various features of React. 
 
 
