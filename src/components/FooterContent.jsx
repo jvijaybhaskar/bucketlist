@@ -14,6 +14,7 @@ class Footer extends React.Component {
 	 					<li> Done: Added react-bootstrap module and basic layout to page </li>
 	 					<li> Done: Limit Entry of items to list </li>
 	 					<li> Done: Add excess entry to Draft list </li>
+	 					<li> Done: On delete from Active list, move item from Draft </li>
 	 					<li> Move mark as done to Done list </li>
 	 					<li> Provide an undo option on delete </li>
 	 					<li> Provision to add meta data to the list (tags, priority, target date) </li>

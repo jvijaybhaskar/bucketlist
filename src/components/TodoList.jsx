@@ -62,6 +62,7 @@ class TodoList extends React.Component {
 		} else {
 			newItems = this.state.items.slice();
 		}
+
 		var itemIndex = newItems.indexOf(item);
 		if(itemIndex != -1) {
 			newItems.splice(itemIndex, 1);
@@ -72,9 +73,30 @@ class TodoList extends React.Component {
 		if(listType == 'draft') {
 			this.setState({draftItems: newItems, currentStatus: "Sucessfully deleted from Draft lists"});
 		} else {
-			this.setState({items: newItems, currentStatus: "Sucessfully deleted from Active list"});
+			if(this.state.draftItems.length > 0) {
+				this.moveItemDraft2Active(newItems, this.state.draftItems[0]);
+			} else {
+				this.setState({items: newItems, currentStatus: "Sucessfully deleted from Active list"});	
+			}
+			
 		}
 		
+	}
+
+	moveItemDraft2Active(activeItems, item2Move){
+		//const item2Move = this.state.draftItems[0];
+		console.log("Active items lenght", activeItems.length);
+		const newActiveItems = activeItems.concat({name:item2Move.name, done:false});
+		console.log("new Active items lenght", newActiveItems.length);
+		
+
+		var updatedDraftItems = this.state.draftItems.slice();
+		console.log("draft length", this.state.draftItems.length);
+		updatedDraftItems.splice(0,1);
+		console.log("draft length", this.state.draftItems.length);
+
+		this.setState({items: newActiveItems, draftItems: updatedDraftItems, currentStatus: "Sucessfully moved from draft to active list"});
+
 	}
 
 	handleStatusClear(){
@@ -96,7 +118,7 @@ class TodoList extends React.Component {
 				<div className = { this.state.items.length <= 0 ? "hidden" : "" }>
 					<h3> Active Items </h3>
 					<ListGroup> 
-						{ this.state.items.map(item => <TodoItem name={item.name} done={item.done} onItemDelete={this.handleItemDelete.bind(this, item)} onToggleDone = {this.handleToggleDone.bind(this, item)}/>)}
+						{ this.state.items.map(item => <TodoItem name={item.name} done={item.done} onItemDelete={this.handleItemDelete.bind(this, item, '')} onToggleDone = {this.handleToggleDone.bind(this, item)}/>)}
 					</ListGroup>
 				</div>
 
